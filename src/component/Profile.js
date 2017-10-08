@@ -12,6 +12,8 @@ import {
 import { loadProfile } from '../action';
 import { connect } from 'react-redux';
 import { Card, Avatar } from 'react-native-elements'
+import ReadMore from '@expo/react-native-read-more-text';
+import Autolink from 'react-native-autolink';
 
 class Profile extends Component {
 
@@ -19,10 +21,29 @@ class Profile extends Component {
     this.props.loadProfile();
   }
 
+_renderTruncatedFooter = (handlePress) => {
+    return (
+      <Text style={{marginTop: 5}} onPress={handlePress}>
+        Read more
+      </Text>
+    );
+  }
+
+  _renderRevealedFooter = (handlePress) => {
+    return (
+      <Text style={{ marginTop: 5}} onPress={handlePress}>
+        Show less
+      </Text>
+    );
+  }
+
+  parseText(text) {
+    return text;
+  }
+
   renderProfile = (profile) => {
     return (
-      <View>
-        <Card>
+      <View style={styles.container}>        
           <View style={{flexDirection: 'row'}}>
           <Avatar
             large
@@ -30,11 +51,22 @@ class Profile extends Component {
             source={{uri: profile.profileThumbnail}}
             activeOpacity={0.7}
           />
-          <Text>
-              {profile.bio}
-          </Text>
-          </View>
-        </Card>
+          <View style={{flexDirection: 'column'}}>
+            <Text style={styles.name}>
+              {profile.name}
+            </Text>
+            <ReadMore
+                numberOfLines={3}
+                renderTruncatedFooter={this._renderTruncatedFooter}
+                renderRevealedFooter={this._renderRevealedFooter}
+                onReady={this._handleTextReady}>
+                <Autolink
+                  text={profile.bio}
+                  hashtag="instagram"
+                  mention="twitter" />
+              </ReadMore>
+            </View>
+          </View>        
       </View>
     )
   }
@@ -56,48 +88,11 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop: 15
   },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  overlay: {
-    position: 'absolute',
-    padding: 16,
-    right: 0,
-    left: 0,
-    alignItems: 'center',
-  },
-  topOverlay: {
-    top: 0,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  bottomOverlay: {
-    bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  captureButton: {
-    padding: 15,
-    backgroundColor: 'white',
-    borderRadius: 40,
-  },
-  typeButton: {
-    padding: 5,
-  },
-  flashButton: {
-    padding: 5,
-  },
-  buttonsSpace: {
-    width: 10,
-  },
+  name: {
+    fontWeight: 'bold'
+  }
 });
 
 const mapStateToProps = state => {  

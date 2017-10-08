@@ -9,9 +9,6 @@ import {
   View,
   Linking
 } from 'react-native';
-import { loadProfile } from '../action';
-import { connect } from 'react-redux';
-import { Card, Avatar } from 'react-native-elements'
 import Profile from './Profile';
 import PumpupSwiper from './PumpupSwiper';
 import PopularPhotos from './PopularPhotos';
