@@ -12,11 +12,32 @@ import {
 import { loadProfile } from '../action';
 import { connect } from 'react-redux';
 import { Card, Avatar } from 'react-native-elements'
-import Profile from './Profile';
-import PumpupSwiper from './PumpupSwiper';
-import PopularPhotos from './PopularPhotos';
 
-class Principal extends Component {
+class Profile extends Component {
+
+  componentWillMount() {
+    this.props.loadProfile();
+  }
+
+  renderProfile = (profile) => {
+    return (
+      <View>
+        <Card>
+          <View style={{flexDirection: 'row'}}>
+          <Avatar
+            large
+            roounded
+            source={{uri: profile.profileThumbnail}}
+            activeOpacity={0.7}
+          />
+          <Text>
+              {profile.bio}
+          </Text>
+          </View>
+        </Card>
+      </View>
+    )
+  }
 
   render() {
     const {loading, profile} = this.props;
@@ -27,9 +48,7 @@ class Principal extends Component {
 
     return (
       <ScrollView>
-        <Profile />
-        <PumpupSwiper />
-        <PopularPhotos />
+        {this.renderProfile(profile)}
       </ScrollView>
     )
   }
@@ -81,5 +100,9 @@ const styles = StyleSheet.create({
   },
 });
 
+const mapStateToProps = state => {  
+  const {profile, loading}  = state.main;
+  return {profile, loading};
+};
 
-export default Principal;
+export default connect(mapStateToProps, { loadProfile })(Profile);

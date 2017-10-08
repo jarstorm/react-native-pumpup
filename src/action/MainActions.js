@@ -1,8 +1,10 @@
 import {
-  LOADED_DATA
+  LOAD_PROFILE,
+  LOAD_USER_PHOTOS,
+  LOAD_POPULAR_PHOTOS
 } from './types';
 
-const BIO_RESULT = {"bio":"Motivation to become the best version of you!  💙💪🌎\n\nIt's #ActiveOctober\n\nShare your photos all month long to be featured!\n\n👻 Snapchat @PumpUp\n\nGet your #TeamPumpUp gear ⬇️",
+const PROFILE_RESULT = {"bio":"Motivation to become the best version of you!  💙💪🌎\n\nIt's #ActiveOctober\n\nShare your photos all month long to be featured!\n\n👻 Snapchat @PumpUp\n\nGet your #TeamPumpUp gear ⬇️",
   "birthday":{"__type":"Date","iso":"1992-02-17T00:00:00.000Z"},
   "followerCount":707674,"followingCount":335,"gender":2,
   "lastActiveDate":{"__type":"Date","iso":"2017-10-06T16:54:08.394Z"},
@@ -20,7 +22,7 @@ const USER_PHOTOS = {"result":
           {"createdAt":"2016-03-23T20:09:03.645Z","thumbnail":"https://d1m37qdzmw041i.cloudfront.net/photos/posts/thumbnails/16080362-1458763645300.jpg","className":"Post","objectId":16080362,"__type":"Object"}
           ]}};
 
-const FEED_PHOTOS = {"result":
+const POPULAR_PHOTOS = {"result":
       {"posts":[
           {"createdAt":"2017-10-06T20:37:04.928Z","thumbnail":"https://d1m37qdzmw041i.cloudfront.net/photos/posts/thumbnails/18538610-1507322230781.jpg","className":"Post","objectId":18538610,"__type":"Object"},
           {"createdAt":"2017-10-06T20:31:37.205Z","thumbnail":"https://d1m37qdzmw041i.cloudfront.net/photos/posts/thumbnails/18538607-1507321900679.jpg","className":"Post","objectId":18538607,"__type":"Object"},
@@ -42,7 +44,7 @@ const FEED_PHOTOS = {"result":
           {"createdAt":"2017-10-06T17:54:37.158Z","thumbnail":"https://d1m37qdzmw041i.cloudfront.net/photos/posts/thumbnails/18538499-1507312481212.jpg","className":"Post","objectId":18538499,"__type":"Object"}
           ]}};
           
-export const loadData = () => {
+export const loadProfile = () => {
   return (dispatch) => {
   	/*var payload = {
       "_method": "GET",
@@ -69,6 +71,19 @@ export const loadData = () => {
   		arr.push(response);
   		dispatch({ type: LOADED_DATA, payload: arr });
   	});*/
-    dispatch({ type: LOADED_DATA, payload: BIO_RESULT });
+    dispatch({ type: LOAD_PROFILE, payload: PROFILE_RESULT });
+  };
+};
+
+
+export const loadUserPhotos = () => {
+  return (dispatch) => {
+    dispatch({ type: LOAD_USER_PHOTOS, payload: USER_PHOTOS });
+  };
+};
+
+export const loadPopularPhotos = () => {
+  return (dispatch) => {
+    dispatch({ type: LOAD_POPULAR_PHOTOS, payload: POPULAR_PHOTOS });
   };
 };
