@@ -1,1 +1,1 @@
-export * from './MainActions';
+export * from './MainActions'

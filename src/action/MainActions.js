@@ -3,7 +3,7 @@ import {
   LOAD_USER_PHOTOS,
   LOAD_POPULAR_PHOTOS,
   READ_MORE
-} from './types';
+} from './types'
 
 const PROFILE_RESULT = {"bio":"Motivation to become the best version of you!  💙💪🌎\n\nIt's #ActiveOctober\n\nShare your photos all month long to be featured!\n\n👻 Snapchat @PumpUp\n\nGet your #TeamPumpUp gear ⬇️",
   "birthday":{"__type":"Date","iso":"1992-02-17T00:00:00.000Z"},
@@ -72,30 +72,30 @@ export const loadProfile = () => {
   		arr.push(response);
   		dispatch({ type: LOADED_DATA, payload: arr });
   	});*/
-    dispatch({ type: LOAD_PROFILE, payload: PROFILE_RESULT });
-  };
-};
+    dispatch({ type: LOAD_PROFILE, payload: PROFILE_RESULT })
+  }
+}
 
 export const readMore = () => {
   return (dispatch) => {
-    dispatch({ type: READ_MORE, payload: true });
-  };
-};
+    dispatch({ type: READ_MORE, payload: true })
+  }
+}
 
 export const readLess = () => {
   return (dispatch) => {
-    dispatch({ type: READ_MORE, payload: false });
-  };
-};
+    dispatch({ type: READ_MORE, payload: false })
+  }
+}
 
 export const loadUserPhotos = () => {
   return (dispatch) => {
-    dispatch({ type: LOAD_USER_PHOTOS, payload: USER_PHOTOS });
-  };
-};
+    dispatch({ type: LOAD_USER_PHOTOS, payload: USER_PHOTOS })
+  }
+}
 
 export const loadPopularPhotos = () => {
   return (dispatch) => {
-    dispatch({ type: LOAD_POPULAR_PHOTOS, payload: POPULAR_PHOTOS });
-  };
-};
+    dispatch({ type: LOAD_POPULAR_PHOTOS, payload: POPULAR_PHOTOS })
+  }
+}
