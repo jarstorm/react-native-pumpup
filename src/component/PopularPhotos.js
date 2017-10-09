@@ -7,8 +7,7 @@ import {
 } from 'react-native'
 import { loadPopularPhotos } from '../action'
 import { connect } from 'react-redux'
-
-
+import { object, func} from 'prop-types'
 
 class PopularPhotos extends Component {
 
@@ -60,6 +59,11 @@ const styles = {
     width: width/3,
     height: width/3
   }
+}
+
+PopularPhotos.propTypes = {
+  loadPopularPhotos: func.isRequired,
+  popular_photos: object.isRequired
 }
 
 const mapStateToProps = state => {  

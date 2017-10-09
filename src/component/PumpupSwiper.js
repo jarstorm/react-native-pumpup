@@ -8,6 +8,7 @@ import Swiper from 'react-native-swiper'
 import { loadUserPhotos } from '../action'
 import { connect } from 'react-redux'
 const { width } = Dimensions.get('window')
+import { object, func } from 'prop-types'
 
 class PumpupSwiper extends Component {
 
@@ -38,6 +39,13 @@ class PumpupSwiper extends Component {
   }
 
 }
+
+
+PumpupSwiper.propTypes = {
+  loadUserPhotos: func.isRequired,  
+  user_photos: object.isRequired
+}
+
 const styles = {
   slide: {
     flex: 1,

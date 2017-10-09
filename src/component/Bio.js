@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { readMore, readLess } from '../action'
 import { connect } from 'react-redux'
+import { bool, object, func} from 'prop-types'
 
 class Bio extends Component {
 
@@ -64,6 +65,13 @@ class Bio extends Component {
       </View>
     )    
   }
+}
+
+Bio.propTypes = {
+  expanded: bool.isRequired,
+  profile: object.isRequired,
+  readMore: func.isRequired,
+  readLess: func.isRequired
 }
 
 const styles = StyleSheet.create({

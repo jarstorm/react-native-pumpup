@@ -7,6 +7,8 @@ import Profile from './Profile'
 import PumpupSwiper from './PumpupSwiper'
 import PopularPhotos from './PopularPhotos'
 
+import { bool } from 'prop-types'
+
 class Principal extends Component {
 
   render() {
@@ -24,6 +26,10 @@ class Principal extends Component {
       </ScrollView>
     )
   }
+}
+
+Principal.propTypes = {
+  loading: bool.isRequired
 }
 
 export default Principal

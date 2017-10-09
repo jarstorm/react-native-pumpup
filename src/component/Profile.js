@@ -10,6 +10,7 @@ import {
 import { loadProfile, readMore, readLess } from '../action'
 import { connect } from 'react-redux'
 import Bio from './Bio'
+import { object, func, bool } from 'prop-types'
 
 class Profile extends Component {
 
@@ -49,6 +50,12 @@ class Profile extends Component {
       </ScrollView>
     )
   }
+}
+
+Profile.propTypes = {
+  loadProfile: func.isRequired,
+  loading: bool.isRequired,
+  profile: object.isRequired
 }
 
 const styles = StyleSheet.create({
