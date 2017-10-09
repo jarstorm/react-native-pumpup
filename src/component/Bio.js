@@ -13,19 +13,19 @@ class Bio extends Component {
 
   renderWord(word) {
     if ('@' === word[0]) {
-      return (<Text style={{color: 'blue'}} onPress={() => 
+      return (<Text key={word} style={styles.link} onPress={() => 
         Linking.openURL('https://twitter.com/' + word.slice(1))}>{word} </Text>)
     } else if ('#' === word[0]) {
-      return (<Text style={{color: 'blue'}} onPress={() => 
+      return (<Text key={word} style={styles.link} onPress={() => 
         Linking.openURL('https://twitter.com/hashtag/' + word.slice(1))}>{word} </Text>)
     } 
-    return (<Text>{word} </Text>)  
+    return (<Text key={word}>{word} </Text>)  
   }
 
   renderLine(line) {
     const parts = line.split(' ')
     return (
-      <Text>
+      <Text key={line}>
         {parts.map(word => this.renderWord(word))}
         <Text>{'\n'}{'\n'}</Text>
       </Text>
@@ -83,12 +83,15 @@ const styles = StyleSheet.create({
   },
   actionText: {
     color: 'blue'
+  },
+  link: {
+    color: 'blue'
   }
 })
 
 const mapStateToProps = state => {  
-  const {profile, loading, read_more, expanded}  = state.main
-  return {profile, loading, read_more, expanded}
+  const {profile, read_more, expanded}  = state.main
+  return {profile, read_more, expanded}
 }
 
 export default connect(mapStateToProps, { readMore, readLess })(Bio)

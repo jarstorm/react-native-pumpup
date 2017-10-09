@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
-  ActivityIndicator,
   Image,
   ScrollView,
   View
@@ -10,7 +10,7 @@ import {
 import { loadProfile, readMore, readLess } from '../action'
 import { connect } from 'react-redux'
 import Bio from './Bio'
-import { object, func, bool } from 'prop-types'
+import { bool, object, func } from 'prop-types'
 
 class Profile extends Component {
 
@@ -38,9 +38,8 @@ class Profile extends Component {
   }
 
   render() {
-    const {loading, profile} = this.props
-    // If we're loading, show a spinner.
-    if (loading) {
+    const {loading_profile, profile} = this.props    
+    if (loading_profile) {
       return <ActivityIndicator />
     }
 
@@ -53,8 +52,8 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  loadProfile: func.isRequired,
-  loading: bool.isRequired,
+  loading_profile: bool.isRequired,
+  loadProfile: func.isRequired,  
   profile: object.isRequired
 }
 
@@ -78,8 +77,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {  
-  const {profile, loading, read_more, expanded}  = state.main
-  return {profile, loading, read_more, expanded}
+  const {loading_profile, profile, read_more, expanded}  = state.main
+  return {loading_profile, profile, read_more, expanded}
 }
 
 export default connect(mapStateToProps, { loadProfile, readMore, readLess })(Profile)

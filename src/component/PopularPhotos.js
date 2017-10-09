@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  ActivityIndicator,
   FlatList,
   Dimensions,
   Image,
@@ -7,7 +8,7 @@ import {
 } from 'react-native'
 import { loadPopularPhotos } from '../action'
 import { connect } from 'react-redux'
-import { object, func} from 'prop-types'
+import { bool, array, func} from 'prop-types'
 
 class PopularPhotos extends Component {
 
@@ -30,7 +31,11 @@ class PopularPhotos extends Component {
   }
 
   render() {
-    const {popular_photos} = this.props
+    const {loading_popular_photos, popular_photos} = this.props
+    
+    if (loading_popular_photos) {
+      return <ActivityIndicator />
+    }
 
     return(
       <View style={styles.list}>
@@ -62,13 +67,14 @@ const styles = {
 }
 
 PopularPhotos.propTypes = {
+  loading_popular_photos: bool.isRequired,
   loadPopularPhotos: func.isRequired,
-  popular_photos: object.isRequired
+  popular_photos: array.isRequired
 }
 
 const mapStateToProps = state => {  
-  const {popular_photos}  = state.main
-  return {popular_photos}
+  const {loading_popular_photos, popular_photos}  = state.main
+  return {loading_popular_photos, popular_photos}
 }
 
 export default connect(mapStateToProps, { loadPopularPhotos })(PopularPhotos)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  ActivityIndicator,
   Dimensions,
   Image,  
   View
@@ -8,7 +9,7 @@ import Swiper from 'react-native-swiper'
 import { loadUserPhotos } from '../action'
 import { connect } from 'react-redux'
 const { width } = Dimensions.get('window')
-import { object, func } from 'prop-types'
+import { bool, array, func } from 'prop-types'
 
 class PumpupSwiper extends Component {
 
@@ -28,7 +29,11 @@ class PumpupSwiper extends Component {
   }
 
   render() {
-    const {user_photos} = this.props
+    const {loading_user_photos, user_photos} = this.props    
+    if (loading_user_photos) {
+      return <ActivityIndicator />
+    }
+
     return(
       <View>
         <Swiper showsButtons={true} height={400}>
@@ -42,8 +47,9 @@ class PumpupSwiper extends Component {
 
 
 PumpupSwiper.propTypes = {
+  loading_user_photos: bool.isRequired, 
   loadUserPhotos: func.isRequired,  
-  user_photos: object.isRequired
+  user_photos: array.isRequired
 }
 
 const styles = {
@@ -56,8 +62,8 @@ const styles = {
 }
 
 const mapStateToProps = state => {  
-  const {user_photos}  = state.main
-  return {user_photos}
+  const {loading_user_photos, user_photos}  = state.main
+  return {loading_user_photos, user_photos}
 }
 
 export default connect(mapStateToProps, { loadUserPhotos })(PumpupSwiper)

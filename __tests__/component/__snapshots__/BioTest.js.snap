@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    numberOfLines={3}
+    style={
+      Object {
+        "flexWrap": "wrap",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        
+         
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+      >
+        
+
+        
+
+      </Text>
+    </Text>
+  </Text>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "flex-end",
+        "marginRight": 10,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Object {
+          "color": "blue",
+        }
+      }
+    >
+      Read more
+    </Text>
+  </View>
+</View>
+`;
