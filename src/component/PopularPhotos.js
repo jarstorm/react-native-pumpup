@@ -50,8 +50,6 @@ class PopularPhotos extends Component {
   }
 }
 
-const {width} = Dimensions.get('window')
-
 const styles = {
   list: {
     justifyContent: 'center',
@@ -61,8 +59,8 @@ const styles = {
   item: {
     backgroundColor: '#CCC',
     margin: 0,
-    width: width/3,
-    height: width/3
+    width: Dimensions.get('window').width/3,
+    height: Dimensions.get('window').width/3
   }
 }
 
