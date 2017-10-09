@@ -1,7 +1,8 @@
 import {
   LOAD_PROFILE,
   LOAD_USER_PHOTOS,
-  LOAD_POPULAR_PHOTOS
+  LOAD_POPULAR_PHOTOS,
+  READ_MORE
 } from '../action/types';
 
 const INITIAL_STATE = {
@@ -10,7 +11,8 @@ const INITIAL_STATE = {
   },
   user_photos: [],
   popular_photos: [],
-  loading: true
+  loading: true,
+  expanded: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,6 +20,8 @@ export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case LOAD_PROFILE:
       return { ...state, profile: action.payload, loading: false };
+    case READ_MORE:
+      return { ...state, expanded: action.payload };
     case LOAD_USER_PHOTOS:
       return { ...state, user_photos: action.payload.result.posts, loading: false };  
     case LOAD_POPULAR_PHOTOS:

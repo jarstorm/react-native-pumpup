@@ -1,7 +1,8 @@
 import {
   LOAD_PROFILE,
   LOAD_USER_PHOTOS,
-  LOAD_POPULAR_PHOTOS
+  LOAD_POPULAR_PHOTOS,
+  READ_MORE
 } from './types';
 
 const PROFILE_RESULT = {"bio":"Motivation to become the best version of you!  💙💪🌎\n\nIt's #ActiveOctober\n\nShare your photos all month long to be featured!\n\n👻 Snapchat @PumpUp\n\nGet your #TeamPumpUp gear ⬇️",
@@ -75,6 +76,17 @@ export const loadProfile = () => {
   };
 };
 
+export const readMore = () => {
+  return (dispatch) => {
+    dispatch({ type: READ_MORE, payload: true });
+  };
+};
+
+export const readLess = () => {
+  return (dispatch) => {
+    dispatch({ type: READ_MORE, payload: false });
+  };
+};
 
 export const loadUserPhotos = () => {
   return (dispatch) => {

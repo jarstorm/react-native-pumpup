@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
-  ListView,
+  FlatList,
   Text,
+  Dimensions,
   Image,
   View
 } from 'react-native';
@@ -16,9 +17,16 @@ class PopularPhotos extends Component {
     this.props.loadPopularPhotos();
   }
 
-renderPhoto(photo) {
+  _keyExtractor = (item, index) => item.objectId;
+
+componentWillUpdate(nextProps, nextState) {
+  console.log("update");
+}
+
+renderPhoto(data) {
+  const photo = data.item;  
 return(
-<View style={styles.slide1} key={photo.objectId}>
+  <View style={styles.slide1} key={photo.objectId}>
     <Image
           style={styles.item}
           source={{uri: photo.thumbnail}}
@@ -28,18 +36,24 @@ return(
 }
 
 render() {
-  const {popular_photos} = this.props;
-  const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  const {popular_photos} = this.props;  
+
 	return(
-		<ListView
-        contentContainerStyle={styles.list}
-        dataSource={ds.cloneWithRows(popular_photos)}
-        renderRow={(data) => this.renderPhoto(data)}
+  <View style={styles.list}>
+		<FlatList        
+        data={popular_photos}
+        renderItem={(data) => this.renderPhoto(data)}        
+        keyExtractor={this._keyExtractor}
+        numColumns={3}
       />
+    </View>  
   )
 }
 
 }
+
+const {height, width} = Dimensions.get('window');
+
 const styles = {
   list: {
         justifyContent: 'center',
@@ -48,9 +62,9 @@ const styles = {
     },
     item: {
         backgroundColor: '#CCC',
-        margin: 10,
-        width: 100,
-        height: 100
+        margin: 0,
+        width: width/3,
+        height: width/3
     }
 }
 

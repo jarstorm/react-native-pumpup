@@ -9,11 +9,12 @@ import {
   View,
   Linking
 } from 'react-native';
-import { loadProfile } from '../action';
+import { loadProfile, readMore, readLess } from '../action';
 import { connect } from 'react-redux';
 import { Card, Avatar } from 'react-native-elements'
 import ReadMore from '@expo/react-native-read-more-text';
 import Autolink from 'react-native-autolink';
+import Bio from './Bio';
 
 class Profile extends Component {
 
@@ -21,50 +22,19 @@ class Profile extends Component {
     this.props.loadProfile();
   }
 
-_renderTruncatedFooter = (handlePress) => {
-    return (
-      <Text style={{marginTop: 5}} onPress={handlePress}>
-        Read more
-      </Text>
-    );
-  }
-
-  _renderRevealedFooter = (handlePress) => {
-    return (
-      <Text style={{ marginTop: 5}} onPress={handlePress}>
-        Show less
-      </Text>
-    );
-  }
-
-  parseText(text) {
-    return text;
-  }
-
   renderProfile = (profile) => {
     return (
       <View style={styles.container}>        
           <View style={{flexDirection: 'row'}}>
-          <Avatar
-            large
-            roounded
+          <Image
+            style={styles.image}
             source={{uri: profile.profileThumbnail}}
-            activeOpacity={0.7}
           />
-          <View style={{flexDirection: 'column'}}>
+          <View style={{flexDirection: 'column', flex: 2}}>
             <Text style={styles.name}>
-              {profile.name}
+              {profile.name} 
             </Text>
-            <ReadMore
-                numberOfLines={3}
-                renderTruncatedFooter={this._renderTruncatedFooter}
-                renderRevealedFooter={this._renderRevealedFooter}
-                onReady={this._handleTextReady}>
-                <Autolink
-                  text={profile.bio}
-                  hashtag="instagram"
-                  mention="twitter" />
-              </ReadMore>
+            <Bio />
             </View>
           </View>        
       </View>
@@ -92,12 +62,22 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold'
+  },
+  image: {
+    width: 50, 
+    height: 50, 
+    borderRadius: 50, 
+    borderColor: 'black', 
+    borderWidth: 1, 
+    marginLeft: 5, 
+    marginRight: 5, 
+    flex:0
   }
 });
 
 const mapStateToProps = state => {  
-  const {profile, loading}  = state.main;
-  return {profile, loading};
+  const {profile, loading, read_more, expanded}  = state.main;
+  return {profile, loading, read_more, expanded};
 };
 
-export default connect(mapStateToProps, { loadProfile })(Profile);
+export default connect(mapStateToProps, { loadProfile, readMore, readLess })(Profile);

@@ -3,6 +3,7 @@ import {
   Dimensions,
   Text,
   Image,
+  Button,
   View
 } from 'react-native';
 import Swiper from 'react-native-swiper';
@@ -10,12 +11,15 @@ import { loadUserPhotos } from '../action';
 import { connect } from 'react-redux';
 const { width } = Dimensions.get('window');
 
-
 class PumpupSwiper extends Component {
 
 componentWillMount() {
     this.props.loadUserPhotos();
   }
+
+
+
+
 
 renderPhoto(photo) {
 return(
@@ -33,7 +37,7 @@ render() {
 console.log(user_photos);
 	return(
 		<View>
-      <Swiper showsButtons={true}>
+      <Swiper showsButtons={true} height={400}>
         {user_photos.map(photo => this.renderPhoto(photo))}
     </Swiper>
     </View>
